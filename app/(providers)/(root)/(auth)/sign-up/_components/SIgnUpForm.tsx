@@ -12,8 +12,7 @@ function SIgnUpForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
-	const [visible, setVisible] = useState(false);
-	const [type, setType] = useState("password");
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 	const handleChangeEmail: ComponentProps<"input">["onChange"] = (e) => {
 		const email = e.target.value;
@@ -61,19 +60,6 @@ function SIgnUpForm() {
 		console.log(data);
 	};
 
-	/**
-	 * 첫번째 입력받는 비밀번호의 타입을 text 또는 password로 바꿈
-	 */
-	const isClickPasswordToggle = () => {
-		if (visible) {
-			setType("password");
-			setVisible(false);
-		} else {
-			setType("text");
-			setVisible(true);
-		}
-	};
-
 	return (
 		<form onSubmit={handleSubmitSignUp}>
 			<label htmlFor="userName">유저 이름</label>
@@ -88,15 +74,18 @@ function SIgnUpForm() {
 			<div className="flex items-center">
 				<label htmlFor="password">비밀번호</label>
 				<input
-					type={type}
+					type={isPasswordVisible ? "text" : "password"}
 					id="password"
 					value={password}
 					onChange={handleChangePassword}
 					placeholder="영문 숫자를 포함하여 8글자 이상 작성"
 				/>
-				<div onClick={isClickPasswordToggle}>
-					{visible ? <FaEye /> : <FaEyeSlash />}
-				</div>
+				<button
+					type="button"
+					onClick={() => setIsPasswordVisible((prev) => !prev)}
+				>
+					{isPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+				</button>
 			</div>
 			<label htmlFor="passwordConfirm">비밀번호 확인</label>
 			<input
