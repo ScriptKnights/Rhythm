@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const regEmail =
@@ -12,6 +12,7 @@ function SIgnUpForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");
+	const userNameRef = useRef<HTMLInputElement | null>(null);
 	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
 	const handleChangeEmail: ComponentProps<"input">["onChange"] = (e) => {
@@ -34,6 +35,9 @@ function SIgnUpForm() {
 	const handleSubmitSignUp: ComponentProps<"form">["onSubmit"] = (e) => {
 		e.preventDefault();
 
+		if (!userNameRef.current) return alert("사용자 이름을 입력해주세요");
+		const userName = userNameRef.current.value;
+
 		// 이메일 양식이 맞는지 확인하는 코드
 		if (!regEmail.test(email))
 			return alert(
@@ -52,6 +56,7 @@ function SIgnUpForm() {
 
 		//회원가입 api에 data를 전송하기 위한 데이터
 		const data = {
+			userName,
 			email,
 			password,
 		};
@@ -62,8 +67,8 @@ function SIgnUpForm() {
 
 	return (
 		<form onSubmit={handleSubmitSignUp}>
-			<label htmlFor="userName">유저 이름</label>
-			<input type="text" id="userName" />
+			<label htmlFor="userName">사용자 이름</label>
+			<input type="text" id="userName" ref={userNameRef} />
 			<label htmlFor="email">이메일</label>
 			<input
 				type="text"
