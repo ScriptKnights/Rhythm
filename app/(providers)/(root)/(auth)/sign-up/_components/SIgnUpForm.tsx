@@ -72,7 +72,6 @@ function SIgnUpForm() {
 			setType("text");
 			setVisible(true);
 		}
-		console.log(visible);
 	};
 
 	return (
@@ -93,6 +92,7 @@ function SIgnUpForm() {
 					id="password"
 					value={password}
 					onChange={handleChangePassword}
+					placeholder="영문 숫자를 포함하여 8글자 이상 작성"
 				/>
 				<div onClick={isClickPasswordToggle}>
 					{visible ? <FaEye /> : <FaEyeSlash />}
