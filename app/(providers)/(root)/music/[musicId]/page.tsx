@@ -8,7 +8,7 @@ interface MusicDetailPageProps {
 }
 
 async function MusicDetailPage({ params: { musicId } }: MusicDetailPageProps) {
-	const lyrics = await api.lyricsApi.getSpotifyLyrics(musicId);
+	const lyricsUrl = await api.lyricsApi.getLyricsUrl(musicId);
 	const chart = await api.Tracks.getTracks(musicId);
 	const album = chart?.album;
 	const release_date = album?.release_date;
@@ -16,8 +16,6 @@ async function MusicDetailPage({ params: { musicId } }: MusicDetailPageProps) {
 
 	const albumImg = chart?.album.images[1].url;
 	const artists = chart?.artists[0];
-
-	console.log("가사", lyrics);
 
 	return (
 		<Page>
@@ -46,7 +44,7 @@ async function MusicDetailPage({ params: { musicId } }: MusicDetailPageProps) {
 			<div className="pb-9 ">
 				<h2 className="mb-5 text-3xl font-bold">가사</h2>
 				<p className="whitespace-pre-wrap break-words break-all  text-base">
-					{lyrics}
+					{lyricsUrl}
 				</p>
 			</div>
 		</Page>

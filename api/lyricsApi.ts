@@ -53,9 +53,9 @@ const getLyricsFromGenius = async (trackTitle: string, artist: string) => {
  * @param trackId string props로 받아온 값
  * @returns
  */
-const getSpotifyLyrics = async (trackId: string) => {
+const getLyricsUrl = async (trackId: string) => {
 	try {
-		// 1. Spotify에서 트랙 정보 가져오기
+		// 1. Spotify에서 트랙   정보 가져오기
 		const trackInfo = await getSpotifyTrack(trackId);
 
 		if (trackInfo) {
@@ -64,7 +64,6 @@ const getSpotifyLyrics = async (trackId: string) => {
 				trackInfo.title,
 				trackInfo.artist
 			);
-			console.log(lyricsUrl);
 
 			if (lyricsUrl) {
 				return lyricsUrl;
@@ -78,5 +77,5 @@ const getSpotifyLyrics = async (trackId: string) => {
 };
 
 export const lyricsApi = {
-	getSpotifyLyrics,
+	getLyricsUrl,
 };
