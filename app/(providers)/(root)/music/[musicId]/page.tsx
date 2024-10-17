@@ -11,10 +11,8 @@ async function MusicDetailPage({ params: { musicId } }: MusicDetailPageProps) {
 	const lyrics = await api.lyricsApi.getSpotifyLyrics(musicId);
 	const chart = await api.Tracks.getTracks(musicId);
 	const album = chart?.album;
-	const release_date = chart!.album.release_date;
+	const release_date = album?.release_date;
 	const day = dayjs(release_date);
-	const release_create_day = day.format("YYYY년 YY월 DD일");
-	const release_year = day.format("YYYY");
 
 	const albumImg = chart?.album.images[1].url;
 	const artists = chart?.artists[0];
@@ -36,7 +34,6 @@ async function MusicDetailPage({ params: { musicId } }: MusicDetailPageProps) {
 						<span className="px-3">•</span>
 						<span>{album?.name}</span>
 						<span className="px-3">•</span>
-						<span title={release_create_day}>{release_year}</span>
 					</div>
 					<div>
 						<button className="bg-red-500 py-4 pl-5 pr-3 text-white rounded-full transition-all duration-300 hover:scale-110 text-4xl">

@@ -2,7 +2,7 @@ import { getAccessToken } from "@/axios/getAccessToken";
 import axios from "axios";
 import { baseURL } from "./spotifyApi";
 
-const fetchSpotifyTrack = async (trackId: string) => {
+const getSpotifyTrack = async (trackId: string) => {
 	const accessToken = await getAccessToken(); // Spotify API 인증 토큰
 
 	try {
@@ -22,8 +22,8 @@ const fetchSpotifyTrack = async (trackId: string) => {
 	}
 };
 
-const fetchLyricsFromGenius = async (trackTitle: string, artist: string) => {
-	const accessToken = await getAccessToken(); // Genius API 인증 토큰
+const getLyricsFromGenius = async (trackTitle: string, artist: string) => {
+	const accessToken = process.env.NEXT_PUBLIC_GENIUS_CLIENT_TOKEN; // Genius API 인증 토큰
 	const query = `${trackTitle} ${artist}`;
 
 	try {
@@ -56,14 +56,15 @@ const fetchLyricsFromGenius = async (trackTitle: string, artist: string) => {
 const getSpotifyLyrics = async (trackId: string) => {
 	try {
 		// 1. Spotify에서 트랙 정보 가져오기
-		const trackInfo = await fetchSpotifyTrack(trackId);
+		const trackInfo = await getSpotifyTrack(trackId);
 
 		if (trackInfo) {
 			// 2. Genius에서 가사 검색하기
-			const lyricsUrl = await fetchLyricsFromGenius(
+			const lyricsUrl = await getLyricsFromGenius(
 				trackInfo.title,
 				trackInfo.artist
 			);
+			console.log(lyricsUrl);
 
 			if (lyricsUrl) {
 				return lyricsUrl;
