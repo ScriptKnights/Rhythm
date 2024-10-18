@@ -83,7 +83,6 @@ function SearchPage() {
   const album = searchResults.albums;
   const playlists = searchResults.playlists;
   const artists = searchResults.artists;
-  console.log(track);
   return (
     <Page>
       검색
