@@ -2,7 +2,7 @@
 
 ![서비스 이미지](https://github.com/ScriptKnights/Rhythm/blob/develop/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202024-11-01%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2010.31.40.png)
 
-- 배포 URL: https://rhythm-tan.vercel.app
+- 배포 URL: https://rhythm-wheat.vercel.app/
 
 > 테스트용 계정
  >> 테스트 ID: aa@gmail.com
